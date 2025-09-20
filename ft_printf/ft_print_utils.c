@@ -6,7 +6,7 @@
 /*   By: chevfy <chevfy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 11:33:11 by chevfy            #+#    #+#             */
-/*   Updated: 2025/09/17 14:08:30 by chevfy           ###   ########.fr       */
+/*   Updated: 2025/09/17 17:36:50 by chevfy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,6 @@ int	ft_printnbr(int n)
 
 int	ft_printpercent(void)
 {
-	write(1, '%', 1);
+	write(1, "%", 1);
 	return (1);
 }

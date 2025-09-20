@@ -6,7 +6,7 @@
 /*   By: chevfy <chevfy@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 14:49:55 by chevfy            #+#    #+#             */
-/*   Updated: 2025/09/17 14:09:37 by chevfy           ###   ########.fr       */
+/*   Updated: 2025/09/20 15:37:44 by chevfy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,24 @@ int	ft_formats(va_list args, const char format)
 	if (format == 'c')
 		length += ft_printchar(va_arg(args, int));
 	if (format == 's')
-		length += ft_printstr(va_arg(args, char*));
+		length += ft_printstr(va_arg(args, char *));
 	if (format == 'd' || format == 'i')
 		length += ft_printnbr(va_arg(args, int));
+	if (format == 'p')
+		length += ft_printptr(va_arg(args, unsigned long long));
+	if (format == 'u')
+		length += ft_print_unsigned(va_arg(args, unsigned int));
+	if (format == 'x' || format == 'X')
+		length += ft_print_hex(va_arg(args, unsigned int), format);
+	if (format == '%')
+		length += ft_printpercent();
+	return (length);
 }
 
 int	ft_printf(const char *str, ...)
 {
 	va_list	args;
 	int		length;
-	int		i;
 	int		i;
 
 	if (!str)

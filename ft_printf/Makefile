@@ -1,55 +1,52 @@
+
+
+NAME        = libftprintf.a
+CC          = gcc
+CFLAGS      = -Wall -Wextra -Werror
+AR          = ar rcs
+RM          = rm -f
+
+# Directories
+SRC_DIR     = .
+OBJ_DIR     = obj
+LIBFT_DIR   = libft
+
+# Source files
+SRC_FILES   = ft_printf \
+              ft_print_utils \
+              ft_print_ptr \
+              ft_print_unsigned \
+              ft_print_hex
+
+SRC         = $(addprefix $(SRC_DIR)/, $(addsuffix .c, $(SRC_FILES)))
+OBJ         = $(addprefix $(OBJ_DIR)/, $(addsuffix .o, $(SRC_FILES)))
+
 # **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: chevfy <chevfy@student.42.fr>              +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/09/12 14:40:51 by chevfy            #+#    #+#              #
-#    Updated: 2025/09/17 16:29:19 by chevfy           ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
 
-NAME		= libftprintf.a
-INCLUDE		= include
-SRC_DIR		= src/
-CC			= gcc
-CFLAGS		= -Wall -Werror -Wextra -I
-RM			= rm -f
-AR			= ar rcs
+all: $(NAME)
 
+$(NAME): $(OBJ)
+	@make -C $(LIBFT_DIR)
+	@cp $(LIBFT_DIR)/libft.a $(NAME)
+	@$(AR) $(NAME) $(OBJ)
+	@echo "libftprintf.a created!"
 
-SRC_FILES	=	ft_printf ft_printf_utils ft_print_ptr ft_print_unsigned ft_print_hex
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
+	@$(CC) $(CFLAGS) -I. -I$(LIBFT_DIR) -c $< -o $@
 
-
-SRC 		= 	$(addsuffix .c, $(SRC_FILES))
-OBJ 		= 	$(addsuffix .o, $(SRC_FILES))
-
-OBJF		=	.cache_exists
-
-all:		$(NAME)
-
-$(NAME):	$(OBJ)
-			@make -C $(LIBFT)
-			@cp libft/libft.a .
-			@mv libft.a $(NAME)
-			@$(AR) $(NAME) $(OBJ)
-\
-$(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJF)
-			@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
-
-$(OBJF):
-			@mkdir -p $(OBJ_DIR)
+$(OBJ_DIR):
+	@mkdir -p $(OBJ_DIR)
 
 clean:
-			@$(RM) -rf $(OBJ_DIR)
-			@make clean -C $(LIBFT)
+	@$(RM) -r $(OBJ_DIR)
+	@make clean -C $(LIBFT_DIR)
+	@echo "Object files cleaned."
 
-fclean:		clean
-			@$(RM) -f $(NAME)
-			@$(RM) -f $(LIBFT)/libft.a
+fclean: clean
+	@$(RM) $(NAME)
+	@$(RM) $(LIBFT_DIR)/libft.a
+	@echo "All cleaned."
 
-re:			fclean all
+re: fclean all
 
-
-.PHONY:		all clean fclean re norm
+.PHONY: all clean fclean re
