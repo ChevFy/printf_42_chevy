@@ -32,5 +32,3 @@ This creates `libftprintf.a` for use in other projects.
   `%c`, `%s`, `%p`, `%d`, `%i`, `%u`, `%x`, `%X`, and `%%`
 * Works with variable arguments using `va_list`
 * Can be combined with your own libft for larger projects
-
-```
