@@ -1,4 +1,3 @@
-````markdown
 # ft_printf - 42 Project (Rank 1)
 
 **Author:** ChevFy  
@@ -14,14 +13,14 @@ handling multiple conversions and formatting.
 
 1. Clone:
 
-```bash
+bash
+```
 git clone git@github.com:ChevFy/printf_42_chevy.git
 cd printf_42_chevy
-````
+```
 
 2. Build the library:
-
-```bash
+```
 make
 ```
 
@@ -34,5 +33,4 @@ This creates `libftprintf.a` for use in other projects.
 * Works with variable arguments using `va_list`
 * Can be combined with your own libft for larger projects
 
-```
 ```
